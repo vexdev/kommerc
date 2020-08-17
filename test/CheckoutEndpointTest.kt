@@ -10,13 +10,15 @@ import io.ktor.features.*
 import kotlin.test.*
 import io.ktor.server.testing.*
 
-class ApplicationTest {
+class CheckoutEndpointTest {
     @Test
-    fun testRoot() {
+    fun emptyBodyReturns400() {
         withTestApplication({ module(testing = true) }) {
-            handleRequest(HttpMethod.Get, "/").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("HELLO WORLD!", response.content)
+            handleRequest(HttpMethod.Post, "/checkout") {
+                addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                setBody("")
+            }.apply {
+                assertEquals(HttpStatusCode.BadRequest, response.status())
             }
         }
     }
