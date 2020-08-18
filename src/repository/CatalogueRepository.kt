@@ -7,6 +7,6 @@ import com.vexdev.model.store.Product
  */
 interface CatalogueRepository {
 
-    fun getCatalogue(): List<Product>
+    fun getCatalogue(): Map<Int, Product>
 
 }

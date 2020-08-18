@@ -9,26 +9,26 @@ import java.math.BigDecimal
  */
 class MockCatalogueRepository : CatalogueRepository {
 
-    override fun getCatalogue(): List<Product> = listOf(
-        Product(
+    override fun getCatalogue(): Map<Int, Product> = mapOf(
+        ROLEX_SKU to Product(
             sku = ROLEX_SKU,
             name = "Rolex",
             price = BigDecimal(100),
             discounts = listOf(BulkDiscount(3, BigDecimal(200)))
         ),
-        Product(
+        MK_SKU to Product(
             sku = MK_SKU,
             name = "Michael Kors",
             price = BigDecimal(80),
             discounts = listOf(BulkDiscount(2, BigDecimal(120)))
         ),
-        Product(
+        SWATCH_SKU to Product(
             sku = SWATCH_SKU,
             name = "Swatch",
             price = BigDecimal(50),
             discounts = emptyList()
         ),
-        Product(
+        CASIO_SKU to Product(
             sku = CASIO_SKU,
             name = "Casio",
             price = BigDecimal(30),

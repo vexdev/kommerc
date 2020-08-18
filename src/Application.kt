@@ -27,10 +27,13 @@ fun Application.module(testing: Boolean = false) {
     }
 
     install(StatusPages) {
-        exception<ContentTransformationException> { cause ->
+        exception<ContentTransformationException> { _ ->
             call.respond(HttpStatusCode.BadRequest)
         }
-        exception<Throwable> { cause ->
+        exception<CheckoutService.MissingProductException> { _ ->
+            call.respond(HttpStatusCode.NotFound)
+        }
+        exception<Throwable> { _ ->
             call.respond(HttpStatusCode.InternalServerError)
         }
     }
@@ -38,8 +41,12 @@ fun Application.module(testing: Boolean = false) {
     routing {
         post("/checkout") {
             val request = call.receive<CheckoutRequest>()
-            val total = checkoutService.checkout(request.skus)
-            call.respond(CheckoutResponse(total))
+            if (request.skus.isEmpty()) {
+                call.respond(HttpStatusCode.BadRequest)
+            } else {
+                val total = checkoutService.checkout(request.skus)
+                call.respond(CheckoutResponse(total))
+            }
         }
     }
 }
