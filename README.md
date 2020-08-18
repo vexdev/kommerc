@@ -1,9 +1,38 @@
 # Kommerc - Simple ecommerce PoC
 
+## How to Compile
+
+The build system used is Gradle. This project can be built using the provided gradle wrapper:
+
+```
+$ ./gradlew build
+```
+
+## How to Test
+
+The previous command actually also runs tests. However if you'd like to run them separately, you can do so with:
+
+```
+$ ./gradlew test
+```
+
+## How to Run
+
+The server can be run, by default on port 8080 (Configurable in `resources/application.conf`), with the following 
+command:
+
+```
+$ ./gradlew run
+```
+
 ## Developer notes
 
 I decided to pull those notes out of their original place (Code comments) as they are only relevant to this PoC and 
 would otherwise pollute the code making it less readable.
+
+I decided to try ktor, it was the first time I developed with this framework but I quite liked it, being lightweight and
+not containing too much abstractions or "magic automation" like those often found in bigger, more popular frameworks.
+As usual with Kotlin, the integration with the IDE (IntelliJ) is fantastic.
 
 ### The Product class
 
