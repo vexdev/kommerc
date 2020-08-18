@@ -11,6 +11,7 @@ import io.ktor.routing.*
 import io.ktor.http.*
 import io.ktor.gson.*
 import io.ktor.features.*
+import io.ktor.request.ContentTransformationException
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -22,6 +23,15 @@ val checkoutService = CheckoutService(catalogueRepository)
 fun Application.module(testing: Boolean = false) {
     install(ContentNegotiation) {
         gson {
+        }
+    }
+
+    install(StatusPages) {
+        exception<ContentTransformationException> { cause ->
+            call.respond(HttpStatusCode.BadRequest)
+        }
+        exception<Throwable> { cause ->
+            call.respond(HttpStatusCode.InternalServerError)
         }
     }
 

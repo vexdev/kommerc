@@ -11,29 +11,36 @@ class MockCatalogueRepository : CatalogueRepository {
 
     override fun getCatalogue(): List<Product> = listOf(
         Product(
-            sku = 1,
+            sku = ROLEX_SKU,
             name = "Rolex",
             price = BigDecimal(100),
             discounts = listOf(BulkDiscount(3, BigDecimal(200)))
         ),
         Product(
-            sku = 2,
+            sku = MK_SKU,
             name = "Michael Kors",
             price = BigDecimal(80),
             discounts = listOf(BulkDiscount(2, BigDecimal(120)))
         ),
         Product(
-            sku = 3,
+            sku = SWATCH_SKU,
             name = "Swatch",
             price = BigDecimal(50),
             discounts = emptyList()
         ),
         Product(
-            sku = 4,
+            sku = CASIO_SKU,
             name = "Casio",
             price = BigDecimal(30),
             discounts = emptyList()
         )
     )
+
+    companion object {
+        const val ROLEX_SKU = 1
+        const val MK_SKU = 2
+        const val SWATCH_SKU = 3
+        const val CASIO_SKU = 4
+    }
 
 }
